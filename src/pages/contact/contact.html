@@ -1,17 +1,43 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="marron">
     <ion-title>
-      Contact
+      Conexão
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
+    <ion-buttons>
+      <button ion-item (click)="ativa()">
+        Ativar
+      </button>
+      <button ion-item (click)="config()">
+        Configurações
+      </button>
+      <button ion-item>
+        Status : <a *ngIf="stat == true" style="color:green;">Ligado</a>
+        <a *ngIf="stat == false" style="color:red">Desligado</a>
+      </button>
+      <button ion-item>
+        Dispositivos Emparelhados :
+        <ion-list *ngFor="let device of pairedDevices">
+          <button ion-item (click)="selectDevice(device.address)">{{ device.name }}</button>
+        </ion-list>
+      </button>
+      <button ion-item (click)="disconect();"> Desconectar </button>
+      <button ion-item>
+        Dispositivos Não parelhados :
+        <ion-list *ngFor="let device of unpairedDevices">
+          <button ion-item (click)="selectDevice(device.address)">{{ device.name }}</button>
+        </ion-list>
+      </button>
+    </ion-buttons>
+   
   </ion-list>
+
+  <ion-spinner padding name="crescent" *ngIf="gettingDevices"></ion-spinner>
 </ion-content>

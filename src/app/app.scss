@@ -14,3 +14,26 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.tabs-md .tab-button[aria-selected=true]{
+    color: #9c4f4f
+}
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon{
+    color: #9c4f4f
+
+}
+
+ion-icon {
+    &[class*="custom-"] {
+      mask-size: contain;
+      mask-position: 50% 50%;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 1em;
+      height: 1em;
+    }
+
+    &[class*="config"] {
+      mask-image: url("../../assets/imgs/config.svg");
+    }
+}
